@@ -1,6 +1,8 @@
 # 🤖 Robô Marciano Premium
 
-Projeto desenvolvido em **Kotlin** que simula um robô com respostas progressivamente mais inteligentes, aplicando conceitos de **herança**, **polimorfismo** e **interfaces**.
+Atividade referente à disciplina DESENVOLVIMENTO DE APLICAÇÕES MÓVEIS I de Pós Graduação do **IFSudesteMG**, desenvolvida em **Kotlin**.
+
+O projeto simula um robô com respostas progressivamente mais inteligentes, aplicando conceitos de **herança**, **polimorfismo** e **interfaces**.
 
 ---
 
@@ -26,11 +28,13 @@ RoboMarciano
 │   ├── ehPergunta.kt           # Verifica se a frase é uma pergunta
 │   ├── estaVazia.kt            # Verifica se a frase está vazia
 │   └── temPalavraMaiuscula.kt  # Verifica palavras em maiúsculas
+├── teste/                      # Testes e experimentos
 ├── AcaoGeradorSenha.kt         # Implementação da ação personalizada
 ├── RoboMarciano.kt             # Versão base do robô
 ├── RoboMatematico.kt           # Versão com operações matemáticas
 ├── RoboPremium.kt              # Versão com ação personalizada
-└── main.kt                     # Ponto de entrada do programa
+├── main.kt                     # Ponto de entrada do programa
+└── robo.jar                    # Artefato compilado pronto para execução
 ```
 
 ---
@@ -52,11 +56,7 @@ Responde a frases com base em 6 regras, verificadas nessa ordem:
 
 ### RoboMatematico — operações matemáticas
 
-Herda o `RoboMarciano` e passa a reconhecer operações matemáticas no formato:
-
-```
-<operacao> <numero1> <numero2>
-```
+Herda o `RoboMarciano` e reconhece operações no formato `<operacao> <numero1> <numero2>`:
 
 | Comando | Exemplo | Resposta |
 |---|---|---|
@@ -69,46 +69,20 @@ Herda o `RoboMarciano` e passa a reconhecer operações matemáticas no formato:
 
 ### RoboPremium — ação personalizada
 
-Herda o `RoboMatematico` e permite que o usuário defina uma ação customizada via interface `AcaoPersonalizada`. Quando a palavra `agir` é usada, o robô responde `"É pra já!"` e executa a ação.
+Herda o `RoboMatematico` e permite que o usuário defina uma ação customizada via interface `AcaoPersonalizada`. Quando o comando `agir` é usado, o robô responde `"É pra já!"` e executa a ação.
 
 ```
 agir <comando>
 ```
 
-A ação padrão implementada é o **gerador de senhas**:
+A ação implementada é o **gerador de senhas**:
 
-| Comando | Exemplo | Resposta |
+| Comando | Exemplo | Resultado |
 |---|---|---|
 | `agir senha <tamanho>` | `agir senha 12` | `"É pra já!\nSenha gerada: xK3mP9qRtL2w"` |
 | `agir ajuda` | `agir ajuda` | Lista de comandos disponíveis |
 
----
-
-## ▶️ Como executar
-
-### Pré-requisitos
-
-- [JDK 8+](https://www.oracle.com/java/technologies/downloads/)
-- [Kotlin](https://kotlinlang.org/docs/command-line.html) instalado, ou use o [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-
-### Pelo IntelliJ IDEA
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/seu-usuario/robo-marciano.git
-```
-2. Abra o projeto no IntelliJ IDEA
-3. Execute o arquivo `main.kt`
-
-### Pela linha de comando
-
-```bash
-# Compile todos os arquivos
-kotlinc interfaces/Acaopersonalizada.kt util/*.kt *.kt -include-runtime -d robo.jar
-
-# Execute
-java -jar robo.jar
-```
+> O tamanho da senha deve estar entre 4 e 32 caracteres.
 
 ---
 
@@ -147,9 +121,3 @@ Até mais!
 - **Interface** — `AcaoPersonalizada` desacopla a lógica da ação do robô
 - **Funções utilitárias** — lógica de verificação isolada no pacote `util`
 - **Expressões regulares** — detecção do comando `agir` via `Regex` no `RoboPremium`
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
